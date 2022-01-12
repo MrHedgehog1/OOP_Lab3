@@ -16,6 +16,9 @@ public:
     void set_month(int month);
     void set_year(int year);
     void display_info() const;
+    int get_day();
+    int get_month();
+    int get_year();
 
     Date parseDays(int days);
     int operator-(const Date &other);
@@ -31,6 +34,16 @@ Date::Date(int day, int month, int year) {
 void Date::display_info() const {
     std::cout << "day - " << _day << " month - " << _month << " years - " << _year << std::endl;
 }
+int Date::get_day() {
+    return _day;
+}
+int Date::get_month() {
+    return _month;
+}
+int Date::get_year() {
+    return _year;
+}
+int Date::get_mounth
 Date Date::parseDays(int days) {
     int years = days / DIY;
     int months = (days % DIY) / DIM;
@@ -220,6 +233,7 @@ void print_baseDate(const std::vector <Date> &other ){
         other[i].display_info();
     }
 }
+
 int main() {
     Date a(15, 10, 5);
     Date b(1,2,2);
@@ -227,6 +241,7 @@ int main() {
     std::vector <Date> dates_entry;
     std::vector <int> input_date;
     int i;
+    int result=0;
     char command;
     bool exit = false;
 
@@ -251,17 +266,43 @@ int main() {
                    dates_entry.push_back(Date(input_date[0],input_date[1],input_date[2]));
                    break;
                 case '2':
-                    std::cout << "Все имеющиеся в базе даты:" << std::endl;
-                    for (i = 0; i <size(dates_entry); i++){
-                        std::cout << "Запись номер " << i << std::endl;
-                        dates_entry[i].display_info();
-                    }
+                    print_baseDate(dates_entry);
+                    std::cout << "Введите номер записи для a: ";
+                    std::cin >> i;
+                    a.set_day(dates_entry[i].get_day());
+                    a.set_month(dates_entry[i].get_month());
+                    a.set_year(dates_entry[i].get_year());
+                    std::cout << "Введите номер записи для b: ";
+                    std::cin >> i;
+                    b.set_day(dates_entry[i].get_day());
+                    b.set_month(dates_entry[i].get_month());
+                    b.set_year(dates_entry[i].get_year());
+                    result = a + b;
+                    std::cout << "\nresult - " << result;
+                    break;
+                case '3':
+                    print_baseDate(dates_entry);
+                    std::cout << "Введите номер записи для a: ";
+                    std::cin >> i;
+                    a.set_day(dates_entry[i].get_day());
+                    a.set_month(dates_entry[i].get_month());
+                    a.set_year(dates_entry[i].get_year());
+                    std::cout << "Введите номер записи для b: ";
+                    std::cin >> i;
+                    b.set_day(dates_entry[i].get_day());
+                    b.set_month(dates_entry[i].get_month());
+                    b.set_year(dates_entry[i].get_year());
+                    result = a - b;
+                    std::cout << "\nresult - " << result;
+                case '4':
+
             }
-            int result=0;
+
             result = a + b;
-            std::cout << "\nresult - " << result;
+
             //_tmain();
             std::cout << "\nHello, World!" << std::endl;
             return 0;
 
-        }}
+    }
+}
