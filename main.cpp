@@ -22,6 +22,7 @@ public:
 
     Date parseDays(int days);
     int operator-(const Date &other);
+    int operator-(int i);
 
     friend int operator+(const Date &other, const Date &other1);
     friend bool operator==(const Date &other, const Date &other1);
@@ -34,6 +35,15 @@ Date::Date(int day, int month, int year) {
 void Date::display_info() const {
     std::cout << "day - " << _day << " month - " << _month << " years - " << _year << std::endl;
 }
+void Date::set_day(int day) {
+    _day = day;
+}
+void Date::set_month(int month) {
+    _month = month;
+}
+void Date::set_year(int year) {
+    _year = year;
+}
 int Date::get_day() {
     return _day;
 }
@@ -43,7 +53,6 @@ int Date::get_month() {
 int Date::get_year() {
     return _year;
 }
-int Date::get_mounth
 Date Date::parseDays(int days) {
     int years = days / DIY;
     int months = (days % DIY) / DIM;
@@ -114,6 +123,18 @@ int Date::operator-(const Date &other){
     days += days0;
     daysInMonths = fun(other._month,daysInMonths,other._day,year);
     days-=daysInMonths;
+    daysInMonths=0;
+    std::cout << days << "\nh\n";
+    return days;
+}
+int Date::operator-(int i) {
+    int year = 0, days0 = 0, days = 0, daysInMonths = 0;
+    year = this->_year;
+    days0 = (year / 4)+1;
+    days = year*365;
+    days += days0;
+    daysInMonths = fun(this->_month,daysInMonths,this->_day,year);
+    days+=daysInMonths;
     daysInMonths=0;
     std::cout << days << "\nh\n";
     return days;
@@ -292,10 +313,21 @@ int main() {
                     b.set_day(dates_entry[i].get_day());
                     b.set_month(dates_entry[i].get_month());
                     b.set_year(dates_entry[i].get_year());
-                    result = a - b;
                     std::cout << "\nresult - " << result;
+                    result = a - b;
+                    break;
                 case '4':
-
+                    print_baseDate(dates_entry);
+                    std::cout << "Введите номер записи для a: ";
+                    std::cin >> i;
+                    a.set_day(dates_entry[i].get_day());
+                    a.set_month(dates_entry[i].get_month());
+                    a.set_year(dates_entry[i].get_year());
+                    std::cout << "Введите колличество дней для b: ";
+                    std::cin >> i;
+                    std::cout << "\nresult - " << result;
+                    std::cout << a - i;
+                   break;
             }
 
             result = a + b;
