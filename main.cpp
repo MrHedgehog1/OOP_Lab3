@@ -124,7 +124,7 @@ int Date::operator-(const Date &other){
     daysInMonths = fun(other._month,daysInMonths,other._day,year);
     days-=daysInMonths;
     daysInMonths=0;
-    std::cout << days << "\nh\n";
+    std::cout << days << " - Объект минус объект\n";
     return days;
 }
 int Date::operator-(int i) {
@@ -135,8 +135,10 @@ int Date::operator-(int i) {
     days += days0;
     daysInMonths = fun(this->_month,daysInMonths,this->_day,year);
     days+=daysInMonths;
+    std::cout << days << " дноей в а";
     daysInMonths=0;
-    std::cout << days << "\nh\n";
+    days -= i;
+    std::cout << days << " Объект минус число\n";
     return days;
 }
 int operator+(const Date &other, const Date &other1){
@@ -148,11 +150,14 @@ int operator+(const Date &other, const Date &other1){
     daysInMonths = fun(other._month,daysInMonths,other._day,year);
     days+=daysInMonths;
     daysInMonths=0;
-    std::cout << days << "\nh\n";
+    std::cout << days << " Объект плюс объект\n";
     return days;
 }
 bool operator ==(const Date &other, const Date &other1){
-    return (other._day == other1._day)&&(other._month == other1._month)&&(other._year == other1._year);
+    if ((other._day == other1._day)&&(other._month == other1._month)&&(other._year == other1._year)){
+        return true;
+    }
+    else return false;
 }
 std::vector <int> input_d()
 {
@@ -171,82 +176,7 @@ std::vector <int> input_d()
 
     return in_date;
 }
-/*int fun (int m1,int dm,int d1,int g);
-int _tmain()
-{
-    int g1,g2,m1,m2,d2,i,d,d1,d0,g,dm=0;
-    std::cout<<"Введите 1 дату год мес день"<<std::endl;
-    std::cin>>g1>>m1>>d1;
-    std::cout<<"Введите 2 дату год мес день"<<std::endl;
-    std::cin>>g2>>m2>>d2;
-    g=g2-g1;
-    d0=(g/4)+1;
-    d=g*365;
-    d+=d0;
-    dm=fun (m1,dm,d1,g1);
-    d-=dm;
-    dm=0;
-    dm=fun (m2,dm,d2,g2);
-    d+=dm;
-    std::cout<<d;
-    std::cin>>i;
 
-    return 0;
-}
-
-int fun (int m1,int dm,int d1,int g)
-{
-    switch(m1)
-    {
-        case 1:
-            dm=0+d1;
-            break;
-        case 2:
-            dm=31+d1;
-            break;
-        case 3:
-            if (g-(g/4)*4==0)dm=d1+60;
-            else dm=59+d1;
-            break;
-        case 4:
-            if (g-(g/4)*4==0)dm=91+d1;
-            else dm=90+d1;
-            break;
-        case 5:
-            if (g-(g/4)*4==0) dm=121+d1;
-            else dm=120+d1;
-            break;
-        case 6:
-            if (g-(g/4)*4==0) dm=152+d1;
-            else dm=151+d1;
-            break;
-        case 7:
-            if (g-(g/4)*4==0) dm=182+d1;
-            else dm=181+d1;
-            break;
-        case 8:
-            if (g-(g/4)*4==0) dm=213+d1;
-            else dm=212+d1;
-            break;
-        case 9:
-            if (g-(g/4)*4==0) dm=244+d1;
-            else dm=243+d1;
-            break;
-        case 10:
-            if (g-(g/4)*4==0) dm=274+d1;
-            else dm=273+d1;
-            break;
-        case 11:
-            if (g-(g/4)*4==0) dm=305+d1;
-            else dm=304+d1;
-            break;
-        case 12:
-            if (g-(g/4)*4==0) dm=335+d1;
-            else dm=334+d1;
-            break;
-    }
-    return dm;
-}*/
 void print_baseDate(const std::vector <Date> &other ){
     std::cout << "Все имеющиеся в базе даты:" << std::endl;
     for (int i = 0; i <size(other); i++){
@@ -269,23 +199,23 @@ int main() {
     dates_entry.push_back(a);
     dates_entry.push_back(b);
     while (!exit){
-            std::cout << "\nКомандное меню приветствует вас. Вы можете: \n";
-            std::cout << "\t1. Создать запись даты.\n";
-            std::cout << "\t2. Сложить даты.\n";
-            std::cout << "\t3. Вычетание даты из даты.\n";
-            std::cout << "\t4  добавить к дате заданное колличество дней\n";
-            std::cout << "\t5. Сравнить даты.\n";
-            std::cout << "\t6. Посмотреть записи о треугольниках.\n";
-            std::cout << "\t0. Выход из программы.\n";
-            std::cout << "Команда: ";
-            std::cin >> command;
-            std::cin.ignore();
-            switch (command)
-            {
+        std::cout << "\nКомандное меню приветствует вас. Вы можете: \n";
+        std::cout << "\t1. Создать запись даты.\n";
+        std::cout << "\t2. Сложить даты.\n";
+        std::cout << "\t3. Вычетание даты из даты.\n";
+        std::cout << "\t4  добавить к дате заданное колличество дней\n";
+        std::cout << "\t5. Сравнить даты.\n";
+        std::cout << "\t6. Посмотреть записи дат.\n";
+        std::cout << "\t0. Выход из программы.\n";
+        std::cout << "Команда: ";
+        std::cin >> command;
+        std::cin.ignore();
+        while(!exit) {
+            switch (command) {
                 case '1':
-                   input_date = input_d();
-                   dates_entry.push_back(Date(input_date[0],input_date[1],input_date[2]));
-                   break;
+                    input_date = input_d();
+                    dates_entry.push_back(Date(input_date[0], input_date[1], input_date[2]));
+                    break;
                 case '2':
                     print_baseDate(dates_entry);
                     std::cout << "Введите номер записи для a: ";
@@ -326,15 +256,37 @@ int main() {
                     std::cout << "Введите колличество дней для b: ";
                     std::cin >> i;
                     std::cout << "\nresult - " << result;
-                    std::cout << a - i;
-                   break;
+                    i = a - i;
+                    std::cout << i;
+                    break;
+                case '5':
+                    print_baseDate(dates_entry);
+                    std::cout << "Введите номер записи для a: ";
+                    std::cin >> i;
+                    a.set_day(dates_entry[i].get_day());
+                    a.set_month(dates_entry[i].get_month());
+                    a.set_year(dates_entry[i].get_year());
+                    std::cout << "Введите номер записи для b: ";
+                    std::cin >> i;
+                    b.set_day(dates_entry[i].get_day());
+                    b.set_month(dates_entry[i].get_month());
+                    b.set_year(dates_entry[i].get_year());
+                    if (a == b) {
+                        std::cout << "Даты равны" << std::endl;
+                    } else {
+                        std::cout << "Даты не равны" << std::endl;
+                    }
+                case '6':
+                    print_baseDate(dates_entry);
+                    break;
+                case '0':
+                    exit = true;
+                    break;
+                default:
+                    std::cout << "Вы ввели некорректную команду. Введите от 1 до 6.\n Для выхода введите 0\n" << std::endl;
+                    break;
             }
-
-            result = a + b;
-
-            //_tmain();
-            std::cout << "\nHello, World!" << std::endl;
-            return 0;
-
+        }
+        return 0;
     }
 }
