@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/OOP_Lab3.dir/main.cpp.o -o OOP_Lab3 
